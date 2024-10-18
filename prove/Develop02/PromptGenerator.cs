@@ -13,11 +13,11 @@ class PromptGenerator
             "What was the strongest emotion I felt today?",
             "If I had one thing I could do over today, what would it be?",
             "What was a small act of kindness I witnessed or experienced today?",
-            "Reflect on a challenge or obstacle you faced today and how you overcame it.",
-            "Write about something new you learned today.",
-            "Reflect on a moment of gratitude for something or someone in your life.",
-            "Write about a future adventure or travel destination you're excited about.",
-            "Write about something new you learned in the last general conference."
+            "What experience or challenges did you feel you overcome today.",
+            "Write down six things your learned today.",
+            "Who is your motivator for this sweek.",
+            "Where would you love to take your next vacation.",
+            "Whta new thing did you learn today."
         };
 
     Random random = new Random();
