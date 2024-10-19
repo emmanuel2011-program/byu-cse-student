@@ -1,52 +1,25 @@
-using System.Dynamic;
-
 public class Address
 {
-    private string _streetAddress;
-    private string _city;
-    private string _stateOrProvince;
-    private string _country;
+    public string StreetAddress { get; }
+    public string City { get; }
+    public string StateOrProvince { get; }
+    public string Country { get; }
 
-    public Address(string address, string city, string stateProvince, string country)
+    public Address(string streetAddress, string city, string stateOrProvince, string country)
     {
-        _streetAddress = address;
-        _city = city;
-        _stateOrProvince = stateProvince;
-        _country = country;
+        StreetAddress = streetAddress;
+        City = city;
+        StateOrProvince = stateOrProvince;
+        Country = country;
     }
 
-    public bool IsLocationUSA(string country)
+    public bool IsLocationUSA()
     {
-        if (country.ToLower() == "usa") return true;
-        else return false;
-    }
-
-    public string GetStreetAddress()
-    {
-        return _streetAddress;
-    }
-
-    public string GetCity()
-    {
-        return _city;
-    }
-
-    public string GetStateOrProvince()
-    {
-        return _stateOrProvince;
-    }
-
-    public string GetCountry()
-    {
-        return _country;
+        return Country.ToLower() == "usa";
     }
 
     public string DisplayAddressInfo()
     {
-        
-        string addressInfo = $"Street: {GetStreetAddress()}\nCity: {GetCity()}\nState/Province: {GetStateOrProvince()}\nCountry: {GetCountry()}";
-        // Console.WriteLine(addressInfo);
-        return addressInfo;
+        return $"{StreetAddress}\n{City}, {StateOrProvince}\n{Country}";
     }
-
 }

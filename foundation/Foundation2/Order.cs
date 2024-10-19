@@ -1,68 +1,46 @@
-using System;
 using System.Collections.Generic;
 
 public class Order
 {
-    private List<Product> _products = new();
-    private List<Customer> _customers = new();
-    private int _inUSA = 5;
-    private int _otherCountry = 35;
-    private int _shippingCost;
-    private float _totalPrice;
+    private List<Product> _products;
+    private Customer _customer;
+    private const decimal _shippingCostUSA = 5.00m;
+    private const decimal _shippingCostInternational = 35.00m;
 
-    public Order()
+    public Order(Customer customer)
     {
+        _customer = customer;
+        _products = new List<Product>();
     }
 
-    public void GetShippingLabel()
+    public void AddProduct(Product product)
     {
-        foreach (Customer customer in _customers)
+        _products.Add(product);
+    }
+
+    public decimal CalculateTotalCost()
+    {
+        decimal total = 0;
+        foreach (var product in _products)
         {
-            Address theAddress = customer.GetAddress();
-            Console.WriteLine("\n📦 Shipping label:");
-            Console.WriteLine($"{theAddress.DisplayAddressInfo()}");
-            _shippingCost = customer.IsCustomerInUSA() ? _inUSA : _otherCountry;
+            total += product.TotalCost();
         }
+        total += _customer.IsCustomerInUSA() ? _shippingCostUSA : _shippingCostInternational;
+        return total;
     }
 
-    public int GetShippingCost()
+    public string GetPackingLabel()
     {
-        return _shippingCost;
-    }
-
-    public void GetPackingLabel()
-    {
-        Console.WriteLine("\n📦 Packing label:");
-        foreach (Product product in _products)
+        var packingLabel = "Packing Label:\n";
+        foreach (var product in _products)
         {
-            Console.WriteLine($"Item name: {product.GetProductName()} - Item ID: {product.GetProductID()}");
+            packingLabel += $"Product Name: {product.Name}, Product ID: {product.ProductId}\n";
         }
+        return packingLabel;
     }
 
-    public float CalculateTotalCost()
+    public string GetShippingLabel()
     {
-        foreach (Product product in _products)
-        {
-            _totalPrice += product.TotalPrice();
-        }
-
-        return _totalPrice + GetShippingCost();
-    }
-
-    public void AddCustomer(Customer customer)
-    {
-        _customers.Add(customer);
-    }
-
-    public void AddProduct(Product item)
-    {
-        _products.Add(item);
-    }
-
-    public void DisplayShippingInfo()
-    {
-        GetPackingLabel();
-        GetShippingLabel();
-        Console.WriteLine($"\nYour total cost is ${CalculateTotalCost()}\n");
+        return $"Shipping Label:\n{_customer.Name}\n{_customer.CustomerAddress.DisplayAddressInfo()}";
     }
 }
