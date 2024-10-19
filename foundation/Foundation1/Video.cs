@@ -1,13 +1,20 @@
+using System;
+using System.Collections.Generic;
+
 public class Video
 {
     private string _author;
     private string _title;
     private int _videoLength;
-    private List<Comment> _comments = new();
+    private List<Comment> _comments = new List<Comment>();
 
-    // *args kwarg*
     public void SetVideoMeta(params object[] args)
     {
+        if (args.Length < 3)
+        {
+            throw new ArgumentException("Insufficient arguments provided.");
+        }
+
         _author = args[0].ToString();
         _title = args[1].ToString();
         _videoLength = int.Parse(args[2].ToString());
@@ -28,23 +35,24 @@ public class Video
         return _videoLength;
     }
 
-    public void SetComment(Comment comment)
+    public void AddComment(Comment comment)
     {
         _comments.Add(comment);
     }
 
-    public void DisplayComment()
+    public void DisplayComments()
     {
         foreach (Comment comment in _comments)
         {
             Console.WriteLine($"{comment.GetCommentatorName()} - {comment.GetTheComment()}");
         }
+
         Console.WriteLine("");
     }
 
     public void DisplayMetaData()
     {
-        string meta = $"Author of Video: {GetAuthor()}\nTitle: {GetTitle()}\nVideo length: {GetVideoLength()}min(s)";
+        string meta = $"Author of Video: {GetAuthor()}\nTitle: {GetTitle()}\nVideo Length: {GetVideoLength()} min(s)";
         Console.WriteLine(meta);
     }
 }
