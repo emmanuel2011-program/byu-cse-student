@@ -3,41 +3,41 @@ using System.Collections.Generic;
 
 public class Scripture
 {
-    private List<Word> words;
+    private List<Word> _words;
     public Reference Reference { get; }
-
-    private int currentWordIndex = 0;
+    private int _currentWordIndex = 0;
 
     public Scripture(Reference reference, string text)
     {
         Reference = reference;
-        words = new List<Word>();
+        _words = new List<Word>();
 
         // Split the text into words and create Word objects
         string[] wordArray = text.Split(' ');
+
         foreach (var word in wordArray)
         {
-            words.Add(new Word(word));
+            _words.Add(new Word(word));
         }
     }
 
     public void HideNextWord()
     {
-        if (currentWordIndex < words.Count)
+        if (_currentWordIndex < _words.Count)
         {
-            words[currentWordIndex].Hide();
-            currentWordIndex++;
+            _words[_currentWordIndex].Hide();
+            _currentWordIndex++;
         }
     }
 
     public bool IsCompletelyHidden()
     {
-        return currentWordIndex >= words.Count;
+        return _currentWordIndex >= _words.Count;
     }
 
     public string RenderScripture()
     {
-        string renderedText = string.Join(" ", words);
+        string renderedText = string.Join(" ", _words);
         return $"{Reference}: {renderedText}";
     }
 }
