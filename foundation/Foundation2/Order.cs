@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 public class Order
 {
     private List<Product> _products = new();
@@ -9,10 +12,9 @@ public class Order
 
     public Order()
     {
-
     }
 
-    public void GetShippinglabel()
+    public void GetShippingLabel()
     {
         foreach (Customer customer in _customers)
         {
@@ -60,7 +62,7 @@ public class Order
     public void DisplayShippingInfo()
     {
         GetPackingLabel();
-        GetShippinglabel();
+        GetShippingLabel();
         Console.WriteLine($"\nYour total cost is ${CalculateTotalCost()}\n");
     }
 }

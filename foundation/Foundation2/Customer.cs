@@ -5,7 +5,6 @@ public class Customer
 
     public Customer()
     {
-
     }
 
     public bool IsCustomerInUSA()
@@ -27,7 +26,7 @@ public class Customer
 
     public void SetCustomerAddress(string address, string city, string stateProvince, string country)
     {
-        _customerAddress = new(address: address, city: city, stateProvince: stateProvince, country: country);
+        _customerAddress = new Address(address: address, city: city, stateProvince: stateProvince, country: country);
     }
 
     public Address GetAddress()
