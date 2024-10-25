@@ -17,7 +17,7 @@ class Program
             Console.WriteLine("4. Load Goals");
             Console.WriteLine("5. Record Event");
             Console.WriteLine("6. Quit");
-            Console.Write("Select a choice from the menu: ");
+            Console.Write("Select a choice from the menu (1-5 or 6 to quit): ");
 
             string choice = Console.ReadLine();
 
@@ -228,7 +228,7 @@ class Program
             Console.WriteLine($"Error while loading goals: {ex.Message}");
         }
     }
-
+        // exceeding requirement by loading goals from file
     static void LoadGoalsFromFile(User user, string filename)
     {
         if (!System.IO.File.Exists(filename))
